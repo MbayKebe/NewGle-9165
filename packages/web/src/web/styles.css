@@ -1,0 +1,133 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-navy-900: #0e1a33;
+  --color-navy-700: #1b2d52;
+  --color-navy: #244790;
+  --color-orange: #ffa300;
+  --color-orange-700: #d67524;
+  --color-ink: #14181f;
+  --color-slate: #5a6475;
+  --color-line: #e3e7ee;
+  --color-paper: #ffffff;
+  --color-paper-alt: #f6f8fb;
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.3125rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-3xl: 4rem;
+}
+
+:root {
+  --radius-card: 8px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background-color: var(--color-orange);
+    color: var(--color-navy-900);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .reading {
+    max-width: 72ch;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-stagger > * {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: intro-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .intro-stagger > *:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  .intro-stagger > *:nth-child(2) {
+    animation-delay: 0.13s;
+  }
+  .intro-stagger > *:nth-child(3) {
+    animation-delay: 0.21s;
+  }
+  .intro-stagger > *:nth-child(4) {
+    animation-delay: 0.29s;
+  }
+  .intro-stagger > *:nth-child(5) {
+    animation-delay: 0.37s;
+  }
+
+  @keyframes intro-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal,
+    .intro-stagger > * {
+      opacity: 1;
+      transform: none;
+      animation: none;
+      transition: none;
+    }
+  }
+}
